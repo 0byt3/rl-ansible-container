@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+CYANCOLOR='\e[0;36m'
+YELLOW='\e[0;33m'
+NORMALCOLOR='\e[0;0m'
+
+if [ "$color_prompt" = yes ]; then
+    PS1=$CYANCOLOR'┌─'$YELLOW'[ansible-container: '$NORMALCOLOR'\w'$YELLOW']'$NORMALCOLOR'\n'$CYANCOLOR'└───'$NORMALCOLOR'# '
+else
+    PS1='┌─[ansible-container: \w]\n└─── # '
+fi
+unset color_prompt CYANCOLOR YELLOW NORMALCOLOR
+
+# If this is an xterm set the title to [ansible-container]
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;[ansible-container]: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+if [ -f "$HOME/.profile" ]; then
+  . "$HOME/.profile"
+fi

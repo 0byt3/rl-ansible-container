@@ -1,0 +1,20 @@
+---
+services:
+  rl-ansible:
+    container_name: "rl-ansible"
+    volumes:
+      - type: "bind"
+        source: "~/.ssh"
+        target: "/root/.ssh"
+        volume:
+          nocopy: true
+      - type: "bind"
+        source: "~/Documents"
+        target: "/root/Documents"
+        volume:
+          nocopy: true
+      - type: "bind"
+        source: "~/Downloads"
+        target: "/root/Downloads"
+        volume:
+          nocopy: true
